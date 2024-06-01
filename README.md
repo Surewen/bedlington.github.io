@@ -1,2 +1,2 @@
-# bedlington.github.io
+# bedlington.dog
 A website about bedlington terriers.
