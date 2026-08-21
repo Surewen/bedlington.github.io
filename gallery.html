@@ -6,7 +6,8 @@ title: Gallery
 <p>Explore these distinctive, graceful dogs in action.</p>
 
 <div class="gallery-container">
-  <!-- Tag Sidebar -->
+  
+  <!-- Left Sidebar Filters -->
   <aside class="tag-sidebar">
     <h3>Filter by Tag</h3>
     <button class="tag-btn active" onclick="filterGallery('all', this)">All</button>
@@ -15,26 +16,24 @@ title: Gallery
     <button class="tag-btn" onclick="filterGallery('puppies', this)">Puppies</button>
   </aside>
 
-  <!-- Gallery Grid -->
+  <!-- Right Side Grid -->
   <div class="gallery-grid">
-    <!-- Card 1 -->
     <div class="gallery-card" data-tags="show-trim" onclick="openLightbox(this)">
       <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
       <div class="caption">Classic show trim with the iconic topknot.</div>
     </div>
 
-    <!-- Card 2 -->
     <div class="gallery-card" data-tags="action" onclick="openLightbox(this)">
       <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-running-in-a-yard.jpg" alt="Bedlington Terrier running">
       <div class="caption">A Bedlington showing off its light, springy gait.</div>
     </div>
 
-    <!-- Card 3 (Example with multiple tags separated by space) -->
     <div class="gallery-card" data-tags="puppies show-trim" onclick="openLightbox(this)">
       <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-puppy.jpg" alt="Bedlington Terrier puppy">
       <div class="caption">Young Bedlington showing early coat development.</div>
     </div>
   </div>
+
 </div>
 
 <div id="imageModal" class="modal" onclick="closeLightbox(event)">
