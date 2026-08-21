@@ -6,26 +6,47 @@ title: Gallery
 <p>Explore these distinctive, graceful dogs in action.</p>
 
 <div class="gallery-grid">
-  <div class="gallery-card">
+  <div class="gallery-card" onclick="openLightbox(this)">
     <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
     <div class="caption">Classic show trim with the iconic topknot.</div>
   </div>
-  <div class="gallery-card">
+  <div class="gallery-card" onclick="openLightbox(this)">
     <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terriers-sitting-outdoors-side-by-side.jpg" alt="Two Bedlington Terriers">
     <div class="caption">Two sitting bedlington terriers</div>
   </div>
-  <div class="gallery-card">
+  <div class="gallery-card" onclick="openLightbox(this)">
     <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
     <div class="caption">Classic show trim with the iconic topknot.</div>
   </div>
-  <div class="gallery-card">
+  <div class="gallery-card" onclick="openLightbox(this)">
     <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
     <div class="caption">Classic show trim with the iconic topknot.</div>
   </div>
-  <div class="gallery-card">
+  <div class="gallery-card" onclick="openLightbox(this)">
     <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
     <div class="caption">Classic show trim with the iconic topknot.</div>
   </div>
 
   
 </div>
+
+<div id="imageModal" class="modal" onclick="closeLightbox()">
+  <span class="close-btn">&times;</span>
+  <img class="modal-content" id="modalImg" alt="Expanded Bedlington View">
+  <div id="modalCaption" class="modal-caption"></div>
+</div>
+
+<script>
+  function openLightbox(card) {
+    const img = card.querySelector('img');
+    const caption = card.querySelector('.caption');
+    
+    document.getElementById('modalImg').src = img.src;
+    document.getElementById('modalCaption').innerText = caption ? caption.innerText : '';
+    document.getElementById('imageModal').style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.getElementById('imageModal').style.display = 'none';
+  }
+</script>
