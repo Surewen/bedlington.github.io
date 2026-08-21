@@ -223,3 +223,71 @@ footer {
   .prev-btn { left: 5px; }
   .next-btn { right: 5px; }
 }
+
+
+
+/* Sidebar Layout Grid */
+.gallery-container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+/* Tag Sidebar Styling */
+.tag-sidebar h3 {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.tag-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tag-btn:hover {
+  background-color: var(--border-color);
+}
+
+.tag-btn.active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Responsive adjustments: Stack sidebar on top on smaller screens */
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tag-sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .tag-sidebar h3 {
+    width: 100%;
+    margin-bottom: 0.2rem;
+  }
+
+  .tag-btn {
+    width: auto;
+    margin-bottom: 0;
+  }
+}
