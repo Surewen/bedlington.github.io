@@ -228,36 +228,40 @@ footer {
 
 /* Sidebar Layout Grid */
 .gallery-container {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 2rem;
-  margin-top: 1.5rem;
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-top: 2rem;
 }
 
 /* Tag Sidebar Styling */
 .tag-sidebar h3 {
-  font-size: 1.1rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
+  width: 180px;
+  flex-shrink: 0;
 }
 
 .tag-btn {
   display: block;
   width: 100%;
   text-align: left;
-  background: transparent;
+  background-color: var(--card-bg);
+  color: var(--text-muted);
   border: 1px solid var(--border-color);
-  padding: 0.6rem 1rem;
+  padding: 0.65rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 6px;
-  color: var(--text-main);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease-in-out;
+  appearance: none; /* Strip OS default button styles */
+  -webkit-appearance: none;
 }
 
 .tag-btn:hover {
-  background-color: var(--border-color);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: #ffffff;
 }
 
 .tag-btn.active {
@@ -265,16 +269,27 @@ footer {
   color: #ffffff;
   border-color: var(--primary-color);
   font-weight: 600;
+  box-shadow: 0 2px 4px rgba(91, 115, 142, 0.2);
+}
+
+/* Ensure Gallery Grid Fills Remaining Space */
+.gallery-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0; /* Remove top margin when inside container */
 }
 
 /* Responsive adjustments: Stack sidebar on top on smaller screens */
 @media (max-width: 768px) {
   .gallery-container {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .tag-sidebar {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
