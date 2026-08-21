@@ -5,54 +5,83 @@ title: Gallery
 <h1>Bedlington Gallery</h1>
 <p>Explore these distinctive, graceful dogs in action.</p>
 
-<div class="gallery-grid">
-  <div class="gallery-card" onclick="openLightbox(0)">
-    <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
-    <div class="caption">1Classic show trim with the iconic topknot.</div>
-  </div>
-  <div class="gallery-card" onclick="openLightbox(1)">
-    <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terriers-sitting-outdoors-side-by-side.jpg" alt="Two Bedlington Terriers">
-    <div class="caption">Two sitting bedlington terriers</div>
-  </div>
-  <div class="gallery-card" onclick="openLightbox(2)">
-    <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
-    <div class="caption">2Classic show trim with the iconic topknot.</div>
-  </div>
-  <div class="gallery-card" onclick="openLightbox(3)">
-    <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
-    <div class="caption">3Classic show trim with the iconic topknot.</div>
-  </div>
-  <div class="gallery-card" onclick="openLightbox(4)">
-    <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
-    <div class="caption">4Classic show trim with the iconic topknot.</div>
-  </div>
+<div class="gallery-container">
+  <!-- Tag Sidebar -->
+  <aside class="tag-sidebar">
+    <h3>Filter by Tag</h3>
+    <button class="tag-btn active" onclick="filterGallery('all', this)">All</button>
+    <button class="tag-btn" onclick="filterGallery('show-trim', this)">Show Trim</button>
+    <button class="tag-btn" onclick="filterGallery('action', this)">Action</button>
+    <button class="tag-btn" onclick="filterGallery('puppies', this)">Puppies</button>
+  </aside>
 
-  
+  <!-- Gallery Grid -->
+  <div class="gallery-grid">
+    <!-- Card 1 -->
+    <div class="gallery-card" data-tags="show-trim" onclick="openLightbox(this)">
+      <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
+      <div class="caption">Classic show trim with the iconic topknot.</div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="gallery-card" data-tags="action" onclick="openLightbox(this)">
+      <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-running-in-a-yard.jpg" alt="Bedlington Terrier running">
+      <div class="caption">A Bedlington showing off its light, springy gait.</div>
+    </div>
+
+    <!-- Card 3 (Example with multiple tags separated by space) -->
+    <div class="gallery-card" data-tags="puppies show-trim" onclick="openLightbox(this)">
+      <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-puppy.jpg" alt="Bedlington Terrier puppy">
+      <div class="caption">Young Bedlington showing early coat development.</div>
+    </div>
+  </div>
 </div>
 
 <div id="imageModal" class="modal" onclick="closeLightbox(event)">
   <span class="close-btn" onclick="closeLightbox(event)">&times;</span>
-  
   <button class="nav-btn prev-btn" onclick="changeImage(-1, event)">&#10094;</button>
   <button class="nav-btn next-btn" onclick="changeImage(1, event)">&#10095;</button>
-
   <img class="modal-content" id="modalImg" alt="Expanded Bedlington View">
   <div id="modalCaption" class="modal-caption"></div>
 </div>
 
 <script>
+  let visibleCards = [];
   let currentIndex = 0;
-  let galleryCards = [];
 
-  function openLightbox(index) {
-    galleryCards = Array.from(document.querySelectorAll('.gallery-card'));
-    currentIndex = index;
+  // Tag Filtering Logic
+  function filterGallery(tag, btnElement) {
+    // Update active button state
+    document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    // Filter cards
+    const allCards = document.querySelectorAll('.gallery-card');
+    allCards.forEach(card => {
+      const cardTags = card.getAttribute('data-tags') ? card.getAttribute('data-tags').split(' ') : [];
+      
+      if (tag === 'all' || cardTags.includes(tag)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Lightbox Logic (Adapted for filtered visible cards)
+  function openLightbox(clickedCard) {
+    // Only cycle through cards that are currently visible
+    visibleCards = Array.from(document.querySelectorAll('.gallery-card')).filter(
+      card => card.style.display !== 'none'
+    );
+    
+    currentIndex = visibleCards.indexOf(clickedCard);
     updateModalContent();
     document.getElementById('imageModal').style.display = 'flex';
   }
 
   function updateModalContent() {
-    const card = galleryCards[currentIndex];
+    const card = visibleCards[currentIndex];
     const img = card.querySelector('img');
     const caption = card.querySelector('.caption');
 
@@ -61,19 +90,17 @@ title: Gallery
   }
 
   function changeImage(step, event) {
-    if (event) event.stopPropagation(); // Prevents clicking the arrow from closing the modal
-    currentIndex = (currentIndex + step + galleryCards.length) % galleryCards.length;
+    if (event) event.stopPropagation();
+    currentIndex = (currentIndex + step + visibleCards.length) % visibleCards.length;
     updateModalContent();
   }
 
   function closeLightbox(event) {
-    // Only close if clicking outside the image/buttons or on the X button
     if (event.target.id === 'imageModal' || event.target.classList.contains('close-btn')) {
       document.getElementById('imageModal').style.display = 'none';
     }
   }
 
-  // Keyboard navigation support
   document.addEventListener('keydown', function(e) {
     const modal = document.getElementById('imageModal');
     if (modal.style.display === 'flex') {
