@@ -5,10 +5,10 @@ title: Gallery
 <h1>Bedlington Gallery</h1>
 <p>Explore these distinctive, graceful dogs in action.</p>
 
-<div class="gallery-container">
+<div class="gallery-container detached-layout">
   
-  <!-- Left Sidebar Filters -->
-  <aside class="tag-sidebar">
+  <!-- Detached Left Sidebar -->
+  <aside class="tag-sidebar detached-sidebar">
     <h3>Filter by Tag</h3>
     <button class="tag-btn active" onclick="filterGallery('all', this)">All</button>
     <button class="tag-btn" onclick="filterGallery('show-trim', this)">Show Trim</button>
@@ -16,7 +16,7 @@ title: Gallery
     <button class="tag-btn" onclick="filterGallery('puppies', this)">Puppies</button>
   </aside>
 
-  <!-- Right Side Grid -->
+  <!-- Main Grid -->
   <div class="gallery-grid">
     <div class="gallery-card" data-tags="show-trim" onclick="openLightbox(this)">
       <img src="https://www.akc.org/wp-content/uploads/2017/11/Bedlington-Terrier-standing-outdoors.jpg" alt="Bedlington Terrier standing outdoors">
