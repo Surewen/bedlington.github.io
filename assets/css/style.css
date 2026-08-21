@@ -184,3 +184,42 @@ footer {
   font-weight: bold;
   cursor: pointer;
 }
+
+/* Navigation Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  user-select: none;
+  z-index: 1010;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
+}
+
+/* Ensure mobile layout doesn't obscure buttons */
+@media (max-width: 600px) {
+  .nav-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 1.5rem;
+  }
+  .prev-btn { left: 5px; }
+  .next-btn { right: 5px; }
+}
