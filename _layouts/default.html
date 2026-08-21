@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }}</title>
+  <title>{{ page.title }} | bedlington.dog</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
 
   <header>
-    {% include navbar.html %}
+    <div class="nav-container">
+      <a href="{{ site.baseurl }}/" class="brand-logo">bedlington<span>.dog</span></a>
+      {% include navbar.html %}
+    </div>
   </header>
 
   <main>
     {{ content }}
   </main>
+
+  <footer>
+    <p>&copy; {{ 'now' | date: "%Y" }} bedlington.dog — Dedicated to the graceful, lamb-like terrier.</p>
+  </footer>
 
 </body>
 </html>
