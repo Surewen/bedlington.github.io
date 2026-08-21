@@ -306,3 +306,39 @@ footer {
     margin-bottom: 0;
   }
 }
+
+.gallery-container.detached-layout {
+  position: relative;
+  display: block; /* Disable flex on the main grid wrapper */
+}
+
+/* Push Sidebar Outside the Main Content Div */
+.detached-sidebar {
+  position: absolute;
+  left: -200px; /* Pulls menu 200px to the left, outside the main wrapper */
+  top: 0;
+  width: 160px;
+}
+
+/* Ensure the sidebar converts back to a top bar on narrower screens */
+@media (max-width: 1200px) {
+  .detached-sidebar {
+    position: static;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .detached-sidebar h3 {
+    width: 100%;
+    margin-bottom: 0.3rem;
+  }
+
+  .detached-sidebar .tag-btn {
+    width: auto;
+    margin-bottom: 0;
+  }
+}
